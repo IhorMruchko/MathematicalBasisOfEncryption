@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="EncryptionWPF.Controls.CipherControls.DiffiHelmanUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EncryptionWPF.Controls.CipherControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Name="PValueLabel"
+               Grid.Row="0"
+               Grid.Column="0"
+               Content="{Binding Value, ElementName=PValueSlider}"
+               FontSize="14"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               ContentStringFormat="P = {0}"/>
+
+
+        <Label Name="QValueLabel"
+               Grid.Row="1"
+               Grid.Column="0"
+               Content="{Binding Value, ElementName=QValueSlider}"
+               FontSize="14"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               ContentStringFormat="Q = {0}"/>
+
+
+        <Label Name="AValueLabel"
+               Grid.Row="2"
+               Grid.Column="0"
+               Content="{Binding Value, ElementName=AValueSlider}"
+               FontSize="14"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               ContentStringFormat="A = {0}"/>
+
+        <Label Name="BValueLabel"
+               Grid.Row="3"
+               Grid.Column="0"
+               Content="{Binding Value, ElementName=BValueSlider}"
+               FontSize="14"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               ContentStringFormat="B = {0}"/>
+
+
+        <Slider x:Name="PValueSlider"
+                Grid.Row="0"
+                Grid.Column="1"
+                Minimum="1"
+                Maximum="1000"
+                VerticalAlignment="Center"
+                ValueChanged="ValueSlider_ValueChanged"
+                MouseDoubleClick="ValueSlider_MouseDoubleClick"
+                MouseWheel="ValueSlider_MouseWheel"
+                Value="0"/>
+
+        <Slider x:Name="QValueSlider"
+                Grid.Row="1"
+                Grid.Column="1"
+                Minimum="1"
+                Maximum="1000"
+                VerticalAlignment="Center"
+                ValueChanged="ValueSlider_ValueChanged"
+                MouseDoubleClick="ValueSlider_MouseDoubleClick"
+                MouseWheel="ValueSlider_MouseWheel"
+                Value="0"/>
+
+        <Slider x:Name="AValueSlider"
+                Grid.Row="2"
+                Grid.Column="1"
+                Minimum="1"
+                Maximum="1000"
+                Value="3"
+                VerticalAlignment="Center"
+                ValueChanged="ValueSlider_ValueChanged"
+                MouseDoubleClick="ValueSlider_MouseDoubleClick"
+                MouseWheel="ValueSlider_MouseWheel"/>
+
+        <Slider x:Name="BValueSlider"
+                Grid.Row="3"
+                Grid.Column="1"
+                Minimum="1"
+                Maximum="1000"
+                Value="3"
+                VerticalAlignment="Center"
+                ValueChanged="ValueSlider_ValueChanged"
+                MouseDoubleClick="ValueSlider_MouseDoubleClick"
+                MouseWheel="ValueSlider_MouseWheel"/>
+
+        <Button Grid.Row="4"
+                Grid.ColumnSpan = "2"
+                Content="Generate"
+                Click="GenerateButton_Click">
+        </Button>
+    </Grid>
+</UserControl>

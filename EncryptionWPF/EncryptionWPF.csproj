@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Controls\FormatControls\PictureStates\ImageLoadedImageTabOpenState.cs~RF1787598.TMP" />
+      <None Remove="Controls\FormatControls\PictureStates\TextLoadedTextTabOpenState.cs~RF1d5c01a.TMP" />
+      <None Remove="Controls\FormatControls\PictureUserControl.xaml~RF366da99.TMP" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MathematicalBasisOfEncryption\MathematicalBasisOfEncryption.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resourse\Image\Encoded Images\" />
+    </ItemGroup>
+
+</Project>

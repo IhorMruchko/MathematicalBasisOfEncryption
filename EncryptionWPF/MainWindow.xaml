@@ -1,0 +1,77 @@
+﻿<Window x:Class="EncryptionWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Icon="E:\Programming\C#\MathematicalBasisOfEncryption\EncryptionWPF\Resourse\Image\Encryption.ico"
+        Title="Encryption"        
+        Height="450" Width="800"
+        FontSize="24"
+        FontFamily="Cascadia Code"
+        Name="MainWindowContent">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.RowSpan="2"
+                        x:Name="_formatContent" 
+                        HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center"/>
+
+        <ContentControl Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalContentAlignment="Top"
+                        x:Name="_cipherContent"/>
+
+
+        <StackPanel Grid.Column="1">
+            
+            <Button Content="Encode"
+                    Click="EncodeButton_Click"/>
+            
+            <Button Content="Decode"                
+                    Click="DecodeButton_Click"/>
+
+            <Button Content="Open"                
+                    Click="OpenFile"/>
+
+            <Button Content="Save"                
+                    Click="SaveFile"/>
+
+
+
+            <ComboBox Name="_cipherContentSelector"
+                      SelectedIndex="0"
+                      ItemsSource="{Binding InitialCiphersSelected, ElementName=MainWindowContent}"
+                      FontSize="24"
+                      VerticalContentAlignment="Center"
+                      HorizontalContentAlignment="Center"
+                      SelectionChanged="CipherContentSelector_SelectionChanged"/>
+            
+        </StackPanel>
+
+
+        <ComboBox Grid.Row="2"
+                  Grid.ColumnSpan="2"
+                  Name="_formatSelector" 
+                  SelectedIndex="0"
+                  ItemsSource="{Binding InitialFormatsSelected, ElementName=MainWindowContent}"
+                  FontSize="30"
+                  FontFamily="Cascadia Code"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Center"
+                  SelectionChanged="FormatSelector_SelectionChanged"/>
+
+       
+    </Grid>
+
+</Window>
