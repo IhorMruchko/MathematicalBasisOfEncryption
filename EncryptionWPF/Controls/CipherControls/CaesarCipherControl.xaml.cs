@@ -28,6 +28,6 @@ public partial class CaesarCipherUserControl : UserControl, ICipherUserControl
 
     private void KeyValueSelector_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
     {
-        e.Handled = !(charFormatValidator?.IsMatch(e.Text) ?? true);
+        e.Handled = !(e.Text == "-" || (charFormatValidator?.IsMatch(e.Text) ?? true));
     }
 }

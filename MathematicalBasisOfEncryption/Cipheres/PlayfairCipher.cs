@@ -19,14 +19,14 @@ public class PlayfairCipher : Cipher
             if (IsOnSameWidth(secondChangedPosition))
             {
                 WidthIndex = WidthIndex + step;
-                secondChangedPosition.WidthIndex = WidthIndex;
+                secondChangedPosition.WidthIndex += step;
                 return;
             }
 
             if (IsOnSameHeight(secondChangedPosition))
             {
-                HeightIndex = HeightIndex + step;
-                secondChangedPosition.HeightIndex = HeightIndex;
+                HeightIndex += step;
+                secondChangedPosition.HeightIndex += step;
                 return;
             }
 
@@ -64,7 +64,7 @@ public class PlayfairCipher : Cipher
     {
         CreateTable(_key);
         var bigrams = CreateBigrams(message);
-        var result = string.Join("", bigrams.Select(p => GetPair(p)));
+        var result = string.Join("", bigrams.Select(p => GetPair(p, -1)));
         return message.Length % 2 == 0
             ? result
             : result.Remove(result.Length - 1);
