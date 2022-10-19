@@ -23,7 +23,8 @@ public partial class MainWindow
         ["Vigenere Cipher"] = new VigenereCipherControl(),
         ["RSA Cipher"] = new RSACipherControl(),
         ["Diffi-Helman"] = new DiffiHelmanUserControl(),
-        ["Playfair Cipher"] = new PlayfairCipherUserControl()
+        ["Playfair Cipher"] = new PlayfairCipherUserControl(),
+        ["RС6"] = new RС6CipherControl(),
     };
 
     public MainWindow()
