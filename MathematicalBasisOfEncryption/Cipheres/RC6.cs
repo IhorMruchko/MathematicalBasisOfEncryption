@@ -24,31 +24,12 @@ public class RC6 : Cipher
 
     public override string Decode(string message)
     {
-        if (TryParseMessage(message, out var bytes) == false)
-        {
-            return message;
-        }        
+        var bytes = message.Select(c => (byte)c).ToArray();
         var amountToEnd = bytes.Length % BLOCK_SIZE;
         bytes = bytes.Concat(Enumerable.Range(0, amountToEnd).Select(_ => (byte)0)).ToArray();
         var blocksAmount = bytes.Length / BLOCK_SIZE;
         return Encoding.Unicode.GetString(Enumerable.Range(0, blocksAmount)
             .SelectMany(i => DecodeBlock(bytes, i * BLOCK_SIZE)).ToArray());
-    }
-
-    private static bool TryParseMessage(string message, out byte[] result)
-    {   
-        var bytes = message.Split(' ');
-        result = new byte[bytes.Length];
-        foreach(var (index, value) in Enumerable.Range(0, bytes.Length).Zip(bytes))
-        {
-            if (byte.TryParse(value, out var intValue) == false)
-            {
-                return false;
-            }
-            result[index] = intValue;
-        }
-
-        return true;
     }
 
     public override string Encode(string message)
@@ -57,8 +38,8 @@ public class RC6 : Cipher
         var amountToEnd = bytes.Length % BLOCK_SIZE;
         bytes = bytes.Concat(Enumerable.Range(0, amountToEnd).Select(_ => (byte)0)).ToArray();
         var blocksAmount = bytes.Length / BLOCK_SIZE;
-        return string.Join(' ', Enumerable.Range(0, blocksAmount)
-            .SelectMany(i => EncodeBlock(bytes, i * BLOCK_SIZE)).ToArray());
+        return string.Join(string.Empty, Enumerable.Range(0, blocksAmount)
+            .SelectMany(i => EncodeBlock(bytes, i * BLOCK_SIZE)).Select(b => (char)b).ToArray());
     }
 
     public override bool ValidateKey(object key)
