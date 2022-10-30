@@ -1,11 +1,16 @@
 ﻿namespace MathematicalBasisOfEncryption.Extensions
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using static System.Math;
 
     public static class StringExtension
     {
+        public static string Join<T>(this string connector, IEnumerable<T> toJoin)
+        {
+            return string.Join(connector, toJoin);
+        }
         public static string Repeat(this object value, int times)
         {
             return string.Concat(Enumerable.Repeat(value, times));
