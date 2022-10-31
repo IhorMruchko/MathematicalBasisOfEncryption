@@ -25,7 +25,8 @@ public partial class MainWindow
         ["Diffi-Helman"] = new DiffiHelmanUserControl(),
         ["Playfair Cipher"] = new PlayfairCipherUserControl(),
         ["RС6"] = new RС6CipherControl(),
-        ["BBS"] = new BBSCipherControl()
+        ["BBS"] = new BBSCipherControl(),
+        ["LFSR"] = new LFSRCipherControl()
     };
 
     public MainWindow()

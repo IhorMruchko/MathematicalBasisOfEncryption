@@ -41,6 +41,11 @@ public partial class BBSCipherControl : ICipherUserControl
 
     private (long, long) GetKey()
     {
+        if (PKeyValueSelector.Text == string.Empty || QKeyValueSelector.Text == string.Empty)
+        {
+            return (2, 2);
+        }
+
         var pValue = long.Parse(PKeyValueSelector.Text);
         var qValue = long.Parse(QKeyValueSelector.Text);
 
