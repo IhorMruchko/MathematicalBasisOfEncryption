@@ -17,6 +17,7 @@ public class BBS : Cipher
     private long _q;
     private long _r;
     private long _startValue;
+    private long _currentValue;
 
     private Random _randomizer = new ();
 
@@ -27,12 +28,31 @@ public class BBS : Cipher
 
     public override string Decode(string message)
     {
-        return string.Empty.Join(message.Select((c, i) => Encrypt(c, i)).ToArray());
+        var bytesRepr = Encoding.Unicode.GetBytes(message);
+        var generatedBytes = new byte[bytesRepr.Length];
+        new BitArray(Enumerable.Range(0, bytesRepr.Length * 8)
+                               .Select(_ => Generate())
+                               .ToArray())
+            .CopyTo(generatedBytes, 0);
+
+        return Encoding.Unicode.GetString(bytesRepr.Zip(generatedBytes)
+                                                   .Select(z => (byte)(z.First ^ z.Second))
+                                                   .ToArray());
+
     }
 
     public override string Encode(string message)
     {
-        return string.Empty.Join(message.Select((c, i) => Encrypt(c, i)).ToArray());
+        var bytesRepr = Encoding.Unicode.GetBytes(message);
+        var generatedBytes = new byte[bytesRepr.Length];
+        new BitArray(Enumerable.Range(0, bytesRepr.Length * 8)
+                               .Select(_ => Generate())
+                               .ToArray())
+            .CopyTo(generatedBytes, 0);
+
+        return Encoding.Unicode.GetString(bytesRepr.Zip(generatedBytes)
+                                                   .Select(z => (byte)(z.First ^ z.Second))
+                                                   .ToArray());
     }
 
     public override bool ValidateKey(object key)
@@ -64,7 +84,7 @@ public class BBS : Cipher
 
     protected override Cipher SetDefaultKey()
     {
-        (_p, _q) = (200_183, 160_651);
+        (_p, _q) = (13_163, 92_627);
         SelectR();
         return this;
     }
@@ -75,16 +95,13 @@ public class BBS : Cipher
         {
             _r = _randomizer.Next(2, (int)N);
         }
-        _startValue = (long) Pow(_r, 2) % N;
+        _startValue = (long)(Pow(_r, 2) % N);
+        _currentValue = _startValue;
     }
 
-    private long Generate(int position)
+    private bool Generate()
     {
-        return (long)(Pow(_startValue, Pow(2, position % Modulus)) % N);
-    }
-
-    private char Encrypt(char value, int position)
-    {
-        return (char)(value ^ Generate(position));
+        _currentValue = (long)Pow(_currentValue, 2) % N;
+        return Pow(_currentValue, 2) % 2 == 1;
     }
 }

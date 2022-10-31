@@ -12,5 +12,36 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <Label x:Name="PKeyValueLabel"
+               Height="50"
+               VerticalAlignment="Top"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"
+               FontSize="24"
+               Content="{Binding Text, ElementName=PKeyValueSelector}"
+               ContentStringFormat="P = {0}"/>
+
+        <TextBox Name="PKeyValueSelector"
+                 Grid.Row="1"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 PreviewTextInput="KeyValueSelector_PreviewTextInput"/>
+        
+        <Label x:Name="QKeyValueLabel"
+               Grid.Row="2"
+               Height="50"
+               VerticalAlignment="Top"
+               VerticalContentAlignment="Center"
+               HorizontalContentAlignment="Center"
+               FontSize="24"
+               Content="{Binding Text, ElementName=QKeyValueSelector}"
+               ContentStringFormat="Q = {0}"/>
+
+        <TextBox Name="QKeyValueSelector"
+                 Grid.Row="3"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 PreviewTextInput="KeyValueSelector_PreviewTextInput"/>
     </Grid>
 </UserControl>
