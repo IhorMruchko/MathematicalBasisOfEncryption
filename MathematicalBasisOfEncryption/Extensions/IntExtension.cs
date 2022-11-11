@@ -6,7 +6,7 @@
     {
         public static bool IsPrime(this int value)
         {
-            for (var i = 2; i < Floor(Sqrt(value)); ++i)
+            for (var i = 2; i <= Floor(Sqrt(value)); ++i)
             {
                 if (value % i == 0)
                 {
