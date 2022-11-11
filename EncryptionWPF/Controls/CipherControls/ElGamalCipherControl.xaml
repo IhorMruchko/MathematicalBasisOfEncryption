@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="EncryptionWPF.Controls.CipherControls.ElGamalCipherControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Name="PValueLabel"
+               Grid.Row="0"
+               Grid.Column="0"
+               Content="{Binding Text, ElementName=PValueSelector}"
+               ContentStringFormat="p = {0}"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+        <TextBox x:Name="PValueSelector"
+                 Grid.Row="0"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 PreviewTextInput="KeyValueSelector_PreviewTextInput"/>
+
+        <Label Name="QValueLabel"
+               Grid.Row="1"
+               Grid.Column="0"
+               Content="{Binding Text, ElementName=QValueSelector}"
+               ContentStringFormat="q = {0}"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+        <TextBox x:Name="QValueSelector"
+                 Grid.Row="1"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 PreviewTextInput="KeyValueSelector_PreviewTextInput"/>
+
+        <Label Name="PRSAValueLabel"
+               Grid.Row="2"
+               Grid.Column="0"
+               Content="{Binding Text, ElementName=PRSAValueSelector}"
+               ContentStringFormat="p (rsa) = {0}"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+        <TextBox x:Name="PRSAValueSelector"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 PreviewTextInput="KeyValueSelector_PreviewTextInput"/>
+
+
+        <Label Name="QRSAValueLabel"
+               Grid.Row="3"
+               Grid.Column="0"
+               Content="{Binding Text, ElementName=QRSAValueSelector}"
+               ContentStringFormat="q (rsa) = {0}"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+        <TextBox x:Name="QRSAValueSelector"
+                 Grid.Row="3"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 PreviewTextInput="KeyValueSelector_PreviewTextInput"/>
+
+
+        <Label Name="EValueLabel"
+               Grid.Row="4"
+               Grid.Column="0"
+               Content="{Binding Text, ElementName=EValueSelector}"
+               ContentStringFormat="E = {0}"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+
+        <TextBox x:Name="EValueSelector"
+                 Grid.Row="4"
+                 Grid.Column="1"
+                 VerticalAlignment="Center"
+                 TextAlignment="Center"
+                 PreviewTextInput="KeyValueSelector_PreviewTextInput"/>
+
+    </Grid>
+</UserControl>

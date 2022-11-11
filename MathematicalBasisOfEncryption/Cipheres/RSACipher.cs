@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using MathematicalBasisOfEncryption.CipherBase;
 using MathematicalBasisOfEncryption.Cipheres.CipherValidators.RSAValidators;
 using MathematicalBasisOfEncryption.Extensions;
+using static System.Math;
 
 namespace MathematicalBasisOfEncryption.Cipheres;
 
@@ -17,6 +20,13 @@ public class RSACipher : Cipher
         new EValueOddKeyValidator(),
         new EValueIsCoprimeKeyValidator()
     };
+
+    private readonly bool _isSign;
+
+    public RSACipher(bool isSign = false)
+    {
+        _isSign = isSign;
+    }
 
     public long EValue { get; protected set; }
 
@@ -32,6 +42,30 @@ public class RSACipher : Cipher
 
     public override string Decode(string message)
     {
+       return _isSign 
+            ? DesingMessage(message)
+            : DecodeMessage(message);
+    }
+
+    private string DesingMessage(string message)
+    {
+        var normalizedBlockSize = (int)Floor(Log10(N));
+        var builder = new StringBuilder();
+        var blocks = message.Split().Where(t => t.Length > 0).ToArray();
+        for (var i = 0; i < blocks.Length - 1; ++i)
+        {
+            builder.Append(blocks[i].ToLong()
+                                    .ExponentPow(EValue, N)
+                                    .ToString()
+                                    .NormalizeStart("0", normalizedBlockSize));
+        }
+        builder.Append(blocks[^1].ToLong().ExponentPow(EValue, N));
+
+        return builder.ToString();
+    }
+
+    private string DecodeMessage(string message)
+    {
         var blockSize = GetBlockSize();
         var builder = new StringBuilder();
 
@@ -42,26 +76,52 @@ public class RSACipher : Cipher
 
             for (var j = 0; j < numeric.Length; j += 2)
             {
-                builder.Append(CodingAlphabet[(int)numeric.Slice(j, 2).TrimStart('0')
-                    .TryParse()]);
+                builder.Append(CodingAlphabet[(int)numeric.Slice(j, 2).TrimStart('0').TryParse()]);
             }
         }
-
+        
         return builder.ToString();
     }
 
     public override string Encode(string message)
     {
-        var convertedToNumeric = string.Join(
-            string.Empty,
-            message.Select(c => CodingAlphabet[c].ToString("00")));
+        return _isSign
+            ? SingMessage(message)
+            : EncodeMessage(message);
+       
+    }
+
+    private string SingMessage(string message)
+    {
+        var blockSize = (int)Floor(Log10(N));
+        message = message.FromHexToDec();
+        var builder = new StringBuilder();
+
+        for (var i = 0; i < message.Length; i += blockSize)
+        {
+            builder.Append(message.Slice(i, blockSize)
+                                  .ToLong()
+                                  .ExponentPow(D, N))
+                   .Append(' ');
+        }
+
+        return builder.ToString();
+    }
+
+    private string EncodeMessage(string message)
+    {
         var blockSize = GetBlockSize();
         var builder = new StringBuilder();
 
-        for (var i = 0; i < convertedToNumeric.Length; i += blockSize)
+        for (var i = 0; i < message.Length; i += blockSize)
         {
-            builder.Append(convertedToNumeric.Slice(i, blockSize).TryParse()
-                .ExponentPow(EValue, N).ToString().NormalizeStart("0", blockSize));
+            var numeric = message.Slice(i, blockSize).TrimStart('0').TryParse()
+                .ExponentPow(EValue, N).ToString().NormalizeStart("0", blockSize);
+
+            for (var j = 0; j < numeric.Length; j += 2)
+            {
+                builder.Append(CodingAlphabet[(int)numeric.Slice(j, 2).TrimStart('0').TryParse()]);
+            }
         }
 
         return builder.ToString();

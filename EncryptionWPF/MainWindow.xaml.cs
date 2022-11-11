@@ -26,7 +26,8 @@ public partial class MainWindow
         ["Playfair Cipher"] = new PlayfairCipherUserControl(),
         ["RС6"] = new RС6CipherControl(),
         ["BBS"] = new BBSCipherControl(),
-        ["LFSR"] = new LFSRCipherControl()
+        ["LFSR"] = new LFSRCipherControl(),
+        ["El Gamal"] = new ElGamalCipherControl()
     };
 
     public MainWindow()

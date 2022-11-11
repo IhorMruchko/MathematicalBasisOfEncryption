@@ -14,6 +14,7 @@ public static class LongExtension
             value = changer.Invoke(value);
         }
     }
+
     public static bool IsPrime(this long value)
     {
         for (var i = 2; i < Floor(Sqrt(value)); ++i)
