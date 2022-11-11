@@ -48,7 +48,6 @@ public class ElGamal : Cipher
         var splittedText = message.Split(SIGN_SEPARATOR);
         var text = splittedText[0];
         var sign = splittedText[1];
-        Debug.WriteLine(text.Hash().FromHexToDec());
         return text.Hash().FromHexToDec() == _digitalSignature.Decode(sign) 
             ? "".Join(text.Split(CLOSING).Select(block => DecodeBlock(block)))
             : BAD_SIGN_ERROR;
