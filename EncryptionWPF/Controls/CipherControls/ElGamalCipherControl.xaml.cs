@@ -1,7 +1,6 @@
 ﻿using MathematicalBasisOfEncryption.CipherBase;
 using MathematicalBasisOfEncryption.Cipheres;
 using MathematicalBasisOfEncryption.Extensions;
-using System;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
@@ -11,7 +10,7 @@ public partial class ElGamalCipherControl : UserControl, ICipherUserControl
 {
     private ElGamal _cipher = new ();
 
-    private Regex _charFormatValidator = new("[1-9]+");
+    private Regex _charFormatValidator = new("[0-9]+");
 
     public ElGamalCipherControl()
     {
