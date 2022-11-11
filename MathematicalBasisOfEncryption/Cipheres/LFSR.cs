@@ -27,8 +27,8 @@ public class LFSR : Cipher
     {
         var key = new StringBuilder(_key).ToString();
         return " ".Join(Encoding.Unicode.GetBytes(message)
-                                                          .Select(b => Generate(b, ref key))
-                                                          .ToArray());
+                                        .Select(b => Generate(b, ref key))
+                                        .ToArray());
     }
 
     public override bool ValidateKey(object key)
