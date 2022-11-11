@@ -5,6 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Cipheres\BBS.cs~RF5c24fd.TMP" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     </ItemGroup>
 

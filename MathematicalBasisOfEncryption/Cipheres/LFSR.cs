@@ -17,15 +17,16 @@ public class LFSR : Cipher
     public override string Decode(string message)
     {
         var key = new StringBuilder(_key).ToString();
-        return Encoding.Unicode.GetString(Encoding.Unicode.GetBytes(message)
-                                                          .Select(b => Generate(b, ref key))
-                                                          .ToArray());
+        return Encoding.Unicode.GetString(message.Split()
+                                                 .Select(b => byte.Parse(b))
+                                                 .Select(b => Generate(b, ref key))
+                                                 .ToArray());
     }
 
     public override string Encode(string message)
     {
         var key = new StringBuilder(_key).ToString();
-        return Encoding.Unicode.GetString(Encoding.Unicode.GetBytes(message)
+        return " ".Join(Encoding.Unicode.GetBytes(message)
                                                           .Select(b => Generate(b, ref key))
                                                           .ToArray());
     }
